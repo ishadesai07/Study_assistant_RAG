@@ -1,0 +1,314 @@
+[
+ {
+  "id": 1,
+  "question": "What BLEU score did the big Transformer achieve on WMT 2014 English-to-German?",
+  "expected_answer": "28.4 BLEU, a new state of the art, beating prior results including ensembles by over 2 BLEU.",
+  "pages": [
+   1,
+   8
+  ],
+  "evidence": [
+   "28.4"
+  ]
+ },
+ {
+  "id": 2,
+  "question": "What does the Transformer dispense with that earlier sequence models relied on?",
+  "expected_answer": "Recurrence and convolutions; it is based solely on attention mechanisms.",
+  "pages": [
+   1,
+   2
+  ],
+  "evidence": [
+   "dispensing with recurrence and convolutions"
+  ]
+ },
+ {
+  "id": 3,
+  "question": "How long did the big model train for English-to-French and on what hardware?",
+  "expected_answer": "3.5 days on eight GPUs (P100).",
+  "pages": [
+   1,
+   8
+  ],
+  "evidence": [
+   "3.5 days"
+  ]
+ },
+ {
+  "id": 4,
+  "question": "Why does the sequential nature of recurrent models limit training?",
+  "expected_answer": "It precludes parallelization within training examples, which matters at longer sequence lengths because of memory constraints on batching.",
+  "pages": [
+   2
+  ],
+  "evidence": [
+   "precludes parallelization within training examples"
+  ]
+ },
+ {
+  "id": 5,
+  "question": "How many layers are in the encoder stack, and what are its two sub-layers?",
+  "expected_answer": "N = 6 identical layers, each with multi-head self-attention and a position-wise fully connected feed-forward network.",
+  "pages": [
+   3
+  ],
+  "evidence": [
+   "N= 6 identical layers",
+   "multi-head self-attention"
+  ]
+ },
+ {
+  "id": 6,
+  "question": "What third sub-layer does the decoder add compared with the encoder?",
+  "expected_answer": "A sub-layer performing multi-head attention over the output of the encoder stack.",
+  "pages": [
+   3
+  ],
+  "evidence": [
+   "decoder inserts a third sub-layer"
+  ]
+ },
+ {
+  "id": 7,
+  "question": "What is the output of each sub-layer?",
+  "expected_answer": "LayerNorm(x + Sublayer(x)), i.e. a residual connection followed by layer normalization.",
+  "pages": [
+   3
+  ],
+  "evidence": [
+   "LayerNorm"
+  ]
+ },
+ {
+  "id": 8,
+  "question": "What is d_model, the output dimension of all sub-layers and embedding layers?",
+  "expected_answer": "512.",
+  "pages": [
+   3
+  ],
+  "evidence": [
+   "dmodel = 512"
+  ]
+ },
+ {
+  "id": 9,
+  "question": "Why are the dot products scaled in scaled dot-product attention?",
+  "expected_answer": "For large d_k the dot products grow large in magnitude, pushing softmax into regions with extremely small gradients; scaling by 1/sqrt(d_k) counteracts this.",
+  "pages": [
+   4
+  ],
+  "evidence": [
+   "extremely small gradients"
+  ]
+ },
+ {
+  "id": 10,
+  "question": "How is scaled dot-product attention computed?",
+  "expected_answer": "Attention(Q,K,V) = softmax(QK^T / sqrt(d_k)) V: dot products of the query with all keys, divided by sqrt(d_k), softmax for weights over values.",
+  "pages": [
+   4
+  ],
+  "evidence": [
+   "divide each by"
+  ]
+ },
+ {
+  "id": 11,
+  "question": "How many attention heads does the base model use and what are d_k and d_v?",
+  "expected_answer": "h = 8 parallel heads with d_k = d_v = d_model/h = 64.",
+  "pages": [
+   5
+  ],
+  "evidence": [
+   "h= 8 parallel attention layers"
+  ]
+ },
+ {
+  "id": 12,
+  "question": "What is the benefit of multi-head attention over a single head?",
+  "expected_answer": "It lets the model jointly attend to information from different representation subspaces at different positions; a single head's averaging inhibits this.",
+  "pages": [
+   5
+  ],
+  "evidence": [
+   "different representation"
+  ]
+ },
+ {
+  "id": 13,
+  "question": "How does the decoder prevent positions from attending to later positions?",
+  "expected_answer": "By masking out (setting to -infinity) the softmax inputs that correspond to illegal connections, preserving the auto-regressive property.",
+  "pages": [
+   5
+  ],
+  "evidence": [
+   "masking out"
+  ]
+ },
+ {
+  "id": 14,
+  "question": "What are the inner-layer dimensionality of the feed-forward network and its activation?",
+  "expected_answer": "d_ff = 2048, with two linear transformations and a ReLU in between.",
+  "pages": [
+   5
+  ],
+  "evidence": [
+   "dff= 2048"
+  ]
+ },
+ {
+  "id": 15,
+  "question": "What functions does the Transformer use for positional encoding?",
+  "expected_answer": "Sine and cosine functions of different frequencies.",
+  "pages": [
+   6
+  ],
+  "evidence": [
+   "sine and cosine functions of different frequencies"
+  ]
+ },
+ {
+  "id": 16,
+  "question": "Why did the authors choose sinusoidal positional encodings over learned ones?",
+  "expected_answer": "They may allow the model to extrapolate to sequence lengths longer than those seen in training (results were nearly identical).",
+  "pages": [
+   6
+  ],
+  "evidence": [
+   "extrapolate to sequence lengths longer"
+  ]
+ },
+ {
+  "id": 17,
+  "question": "Compare per-layer complexity of self-attention and recurrent layers.",
+  "expected_answer": "Self-attention is O(n^2 * d); recurrent is O(n * d^2).",
+  "pages": [
+   6
+  ],
+  "evidence": [
+   "Self-Attention O(n2"
+  ]
+ },
+ {
+  "id": 18,
+  "question": "What is the maximum path length between positions in a self-attention layer?",
+  "expected_answer": "O(1), a constant number of sequential operations connects all positions.",
+  "pages": [
+   6
+  ],
+  "evidence": [
+   "constant number of sequentially executed operations"
+  ]
+ },
+ {
+  "id": 19,
+  "question": "When are self-attention layers faster than recurrent layers?",
+  "expected_answer": "When the sequence length n is smaller than the representation dimensionality d.",
+  "pages": [
+   7
+  ],
+  "evidence": [
+   "length nis smaller than the representation dimensionality"
+  ]
+ },
+ {
+  "id": 20,
+  "question": "How large is the WMT 2014 English-German training set and what encoding was used?",
+  "expected_answer": "About 4.5 million sentence pairs, byte-pair encoded with a shared vocabulary of about 37000 tokens.",
+  "pages": [
+   7
+  ],
+  "evidence": [
+   "4.5 million"
+  ]
+ },
+ {
+  "id": 21,
+  "question": "How many GPUs and which type were used, and how long did base models train?",
+  "expected_answer": "8 NVIDIA P100 GPUs; base models trained 100,000 steps, about 12 hours.",
+  "pages": [
+   7
+  ],
+  "evidence": [
+   "8 NVIDIA P100 GPUs"
+  ]
+ },
+ {
+  "id": 22,
+  "question": "Which optimizer and how many warmup steps were used?",
+  "expected_answer": "Adam (beta1 = 0.9, beta2 = 0.98, epsilon = 1e-9) with warmup_steps = 4000.",
+  "pages": [
+   7
+  ],
+  "evidence": [
+   "Adam optimizer"
+  ]
+ },
+ {
+  "id": 23,
+  "question": "What value of label smoothing was used and what is its effect?",
+  "expected_answer": "epsilon_ls = 0.1; it hurts perplexity but improves accuracy and BLEU.",
+  "pages": [
+   8
+  ],
+  "evidence": [
+   "label smoothing of value"
+  ]
+ },
+ {
+  "id": 24,
+  "question": "What dropout rate does the base model use?",
+  "expected_answer": "P_drop = 0.1, applied to sub-layer outputs and to the sums of embeddings and positional encodings.",
+  "pages": [
+   8
+  ],
+  "evidence": [
+   "rate of"
+  ]
+ },
+ {
+  "id": 25,
+  "question": "What beam size and length penalty were used during inference?",
+  "expected_answer": "Beam search with beam size 4 and length penalty alpha = 0.6.",
+  "pages": [
+   8
+  ],
+  "evidence": [
+   "beam size of 4"
+  ]
+ },
+ {
+  "id": 26,
+  "question": "How much worse is single-head attention than the best setting?",
+  "expected_answer": "0.9 BLEU worse.",
+  "pages": [
+   9
+  ],
+  "evidence": [
+   "0.9 BLEU worse"
+  ]
+ },
+ {
+  "id": 27,
+  "question": "What happens when the attention key size d_k is reduced?",
+  "expected_answer": "It hurts model quality, suggesting compatibility is not easy to determine.",
+  "pages": [
+   9
+  ],
+  "evidence": [
+   "reducing the attention key size"
+  ]
+ },
+ {
+  "id": 28,
+  "question": "What happened when sinusoidal encodings were replaced with learned positional embeddings?",
+  "expected_answer": "Nearly identical results to the base model.",
+  "pages": [
+   9
+  ],
+  "evidence": [
+   "nearly identical"
+  ]
+ }
+]
