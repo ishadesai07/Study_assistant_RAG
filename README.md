@@ -110,6 +110,3 @@ eval/       labelled questions + run_eval.py
 tests/      end-to-end smoke test
 ```
 
-## Demo
-
-_Add a screenshot or GIF of the Streamlit UI here (`streamlit run ui/streamlit_app.py`)._
